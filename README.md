@@ -1,0 +1,2 @@
+# wordpress-plugin-raw-html-manipulation-minifier
+Ruthless HTML-Manipulation At A Level Beyond WordPress-API, Minify Whitespace, Move CSS And Styles To HEAD's End, And Scripts To BODY's End, While Preserving Unmodified PRE-Tag's Content Which May Be Similar To HTML-Source. Many More MODIFIERS Can Be Added. Add Verbose Message At The End Of The HTML-Source (As A HTML-Comment) By Uncommenting The Line With "...get_delta_information..." In The Function Below.
