@@ -31,8 +31,8 @@
 call_user_func(function () {
   if (is_admin()) return;
 
-  require_once('lib/assist.php');
-  require_once('lib/modifiers.php');
+  require_once('assist.php');
+  require_once('modifiers.php');
 
 /*╔══════════════════╗
   ║ Modify Raw-HTML. ║
@@ -74,11 +74,11 @@ call_user_func(function () {
     /*────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────*/
                 return $html;
              });
-  }, -9999998);
+  }, -9999999);
 
   add_action('shutdown', function () {
     while (ob_get_level() > 0) @ob_end_flush();
-  }, +9999998);
+  }, +9999999);
 });
 
 ?>
