@@ -1,2 +1,20 @@
-# wordpress-plugin-raw-html-manipulation-minifier
-Ruthless HTML-Manipulation At A Level Beyond WordPress-API, Minify Whitespace, Move CSS And Styles To HEAD's End, And Scripts To BODY's End, While Preserving Unmodified PRE-Tag's Content Which May Be Similar To HTML-Source. Many More MODIFIERS Can Be Added. Add Verbose Message At The End Of The HTML-Source (As A HTML-Comment) By Uncommenting The Line With "...get_delta_information..." In The Function Below.
+# Minifier
+## A WordPress Raw HTML Processing For PHP Developers (And Everyone Else Too...)
+
+'''PHP5
+/* ╔═════════════════════════════════════════════════════╗
+   ║ - Hope You've Enjoyed My Work :]                    ║
+   ╟─────────────────────────────────────────────────────╢
+   ║ - Feel Free To Modifiy And Distribute it (GPL2).    ║
+   ╟─────────────────────────────────────────────────────╢
+   ║ - Donations Are A *Nice* Way Of Saying Thank-You :] ║
+   ║   But Are NOT Necessary!                            ║
+   ║                                                     ║
+   ║ I'm Doing It For The Fun Of It :]                   ║
+   ║                                                     ║
+   ║    - Elad Karako                                    ║
+   ║         Tel-Aviv, Israel- July 2016.                ║
+   ╚═════════════════════════════════════════════════════╝
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ */
+'''
+
