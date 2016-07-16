@@ -98,7 +98,10 @@ call_user_func(function () {
                 $html = unify_duplicated_tags($html);                        /*    saves about 1%                                    */
                 /*#3*/
                 $html = minify_all_inner_css_in_style_tags($html);           /*    saves about 2%                                    */
-                $html = minify_all_inner_javascript_in_script_tags($html);   /*    saves about 4%                                    */
+                /*
+                  //makes google analytics code on bare script to be gone including the script tag!! TODO: fix..
+                  $html = minify_all_inner_javascript_in_script_tags($html);
+                */   /*    saves about 4%                                    */
                /*******************************
                 * add more modifiers here...  *
                 *******************************/
