@@ -51,6 +51,7 @@ call_user_func(function () {
                 $html = put_all_scripts_at_end_of_body($html);               /*    considered Google-PageSpeed Best-Practice         */
                 /*#1*/
                 $html = collapse_multiple_line_feed($html);                  /*    saves about 2%                                    */
+                $html = collapse_white_space_inside_tags($html);             /*    saves about 5-8%                                  */
                 $html = collapse_white_space_between_tags($html);            /*    saves about 5-8%                                  */
                 $html = remove_white_space_around_edges($html);              /*    saves about 5-8%                                  */
                 /*#2*/

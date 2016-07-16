@@ -1,9 +1,17 @@
 <?php
 
-  /**
-   * here you put small functions that will handle the modification of the raw html,
-   * if you need to- break a long function into few assistance-functions and place them in the assist.php file.
-   */
+/* ╔════════════════════════════════════════════╗
+   ║ Modifiers                                  ║
+   ╟────────────────────────────────────────────╢
+   ║ Are functions that process raw-HTML text,  ║
+   ║ and return the processed text.             ║
+   ╟────────────────────────────────────────────╢
+   ║ If you need to- break a long function      ║
+   ║ into a few assistance-functions, then      ║
+   ║ place those at assist.php file.            ║
+   ╚════════════════════════════════════════════╝
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ */
+
 
   /**
    * quickly cut all script tags and paste them before the end-body tag.
@@ -98,6 +106,21 @@
    *
    * @return string
    */
+  function collapse_white_space_inside_tags($html) {
+    /* #1 - whitespace collapsing */
+    $replacements = [
+      "#\<\s+#sm"     =>  "<"                               /* < link.....                                  to   <link                                  */
+    , "#\s+\>#sm"     =>  ">"                               /* <meta.....   >                               to   <meta.....>                            */
+    , "#\s+\/\>#sm"   =>  "/>"                              /* <meta.....   />                              to   <meta...../>                           */
+//    , "#([^\"\']+\=[\"\'][^\"\']+[\"\'])\s+#sm" => "$1 "    /* <meta name="tags"      content="hello"/>     to   <meta name="tags" content="hello"/>    */
+    ];
+    
+    $html = preg_replace(array_keys($replacements), array_values($replacements), $html);
+
+    return $html;
+  }
+
+
   function collapse_white_space_between_tags($html) {
     /* #1 - whitespace collapsing */
     $replacements = [
@@ -122,6 +145,7 @@
 
     return $html;
   }
+
 
 
   /**
