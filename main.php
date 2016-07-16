@@ -46,6 +46,45 @@ call_user_func(function () {
                 $html_before = $html . '';                                   /*    used to compare before/after states               */
                 $html = protect_specific_tags_from_modifications($html);     /*    protect pre-tags and code-tags original content.  */
                 /*-------------------------------------------------------------------------------------------------------------*/
+    /*╔═══════════╗
+      ║ HEAD only ║
+      ╚═══════════╝*/
+                $html = preg_replace_callback("#(<\s*head[^>]*>?)(.*?)(<\s*/\s*head[^>]*>?)#ism",function($match_parts){
+                  if(false === array_key_exists(0, $match_parts)  )  return ""; /* no match */
+                  if(false === array_key_exists(1, $match_parts) ||             /* invalid HEAD content */
+                     false === array_key_exists(2, $match_parts) ||
+                     false === array_key_exists(3, $match_parts)  )  return $match_parts[0]; /* unmodified content */
+
+                  $opening_tag = $match_parts[1];
+                  $inner_html  = $match_parts[2];
+                  $closing_tag = $match_parts[3];
+
+                  /* --------------------------------------- */
+                  /* -   add "just HEAD modifiers" here      */
+                  /* --------------------------------------- */
+                  return $opening_tag . $inner_html . $closing_tag;
+                }, $html, /*limit=*/ 1);
+    /*╔═══════════╗
+      ║ BODY only ║
+      ╚═══════════╝*/
+                $html = preg_replace_callback("#(<\s*body[^>]*>?)(.*?)(<\s*/\s*body[^>]*>?)#ism",function($match_parts){
+                  if(false === array_key_exists(0, $match_parts)  )  return ""; /* no match */
+                  if(false === array_key_exists(1, $match_parts) ||             /* invalid BODY content */
+                     false === array_key_exists(2, $match_parts) ||
+                     false === array_key_exists(3, $match_parts)  )  return $match_parts[0]; /* unmodified content */
+
+                  $opening_tag = $match_parts[1];
+                  $inner_html  = $match_parts[2];
+                  $closing_tag = $match_parts[3];
+
+                  /* --------------------------------------- */
+                  /* -   add "just BODY modifiers" here      */
+                  /* --------------------------------------- */
+                  return $opening_tag . $inner_html . $closing_tag;
+                }, $html, /*limit=*/ 1);
+    /*╔══════════════════════════╗
+      ║ Global (all of the HTML) ║
+      ╚══════════════════════════╝*/
                 /*#0*/
                 $html = put_all_link_css_at_end_of_head($html);              /*    considered Google-PageSpeed Best-Practice         */
                 $html = put_all_scripts_at_end_of_body($html);               /*    considered Google-PageSpeed Best-Practice         */

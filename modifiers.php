@@ -109,10 +109,11 @@
   function collapse_white_space_inside_tags($html) {
     /* #1 - whitespace collapsing */
     $replacements = [
-      "#\<\s+#sm"     =>  "<"                               /* < link.....                                  to   <link                                  */
-    , "#\s+\>#sm"     =>  ">"                               /* <meta.....   >                               to   <meta.....>                            */
-    , "#\s+\/\>#sm"   =>  "/>"                              /* <meta.....   />                              to   <meta...../>                           */
-//    , "#([^\"\']+\=[\"\'][^\"\']+[\"\'])\s+#sm" => "$1 "    /* <meta name="tags"      content="hello"/>     to   <meta name="tags" content="hello"/>    */
+      "#\<\s+#sm"                     =>  "<"                               /* < link.....                                  to   <link                                  */
+    , "#\s+\>#sm"                     =>  ">"                               /* <meta.....   >                               to   <meta.....>                            */
+    , "#\s+\/\>#sm"                   =>  "/>"                              /* <meta.....   />                              to   <meta...../>                           */
+    , "#\<([^\>]*)\s\s+([^\>]*)\>#"   =>  "<$1 $2>"
+    //, "#([^\"\']+\=[\"\'][^\"\']+[\"\'])\s+#sm" => "$1 "    /* <meta name="tags"      content="hello"/>     to   <meta name="tags" content="hello"/>    */
     ];
     
     $html = preg_replace(array_keys($replacements), array_values($replacements), $html);
