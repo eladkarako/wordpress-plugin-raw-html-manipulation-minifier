@@ -3,7 +3,7 @@
    * Plugin Name:        Minifier
    * Donate link:        https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=7994YX29444PA
    * License:            GPL2
-   * Version:            4.1.0
+   * Version:            4.3.1
    * Description:        Ruthless HTML-Manipulation At A Level Beyond WordPress-API, Minify Whitespace, Move CSS And Styles To HEAD's End, And Scripts To BODY's End, While Preserving Unmodified PRE-Tag's Content Which May Be Similar To HTML-Source. Many More MODIFIERS Can Be Added. Add Verbose Message At The End Of The HTML-Source (As A HTML-Comment) By Uncommenting The Line With "...get_delta_information..." In The Function Below.
    * Author:             eladkarako
    * Author Email:       The_Author_Value_Above@gmail.com
@@ -31,18 +31,20 @@
 call_user_func(function () {
   /* ---------------------------------------------------------------------------------------------- */
   $is_engine_ok = call_user_func(function(){
-                    function is_server_val($attribute, $regex){
+                    $is_server_val = function($attribute, $regex){
                       return (1 === preg_match($regex, filter_input(INPUT_SERVER,$attribute)));
-                    }
+                    };
 
-                    $is_php     = is_server_val('PHP_SELF',   '#index\.php$#i'   );  /* WordPress-Template-engine */
-                    $is_admin   = is_server_val('SCRIPT_URL', '#\/wp\-admin\/#i' );  /* admin folder */
-                    $is_feed    = is_server_val('SCRIPT_URL', '#\/feed\/#i'      ) || is_server_val('REDIRECT_SCRIPT_URL',  '#\/feed\/#i'      );
-                    $is_atom    = is_server_val('SCRIPT_URL', '#\/atom\/#i'      ) || is_server_val('REDIRECT_SCRIPT_URL',  '#\/atom\/#i'      );
-                    $is_json    = is_server_val('SCRIPT_URL', '#\/wp\-json\/#i'  ) || is_server_val('REDIRECT_SCRIPT_URL',  '#\/wp\-json\/#i'  );
-                    $is_sitemap = is_server_val('SCRIPT_URL', '#sitemap\.xml$#i' ) || is_server_val('REDIRECT_SCRIPT_URL',  '#sitemap\.xml$#i' );
-                    $is_article = is_server_val('SCRIPT_URL', '#\/$#i'           );  /* RISKY! permalink format specific. */
-                    
+                    $is_php     = $is_server_val('PHP_SELF',   '#index\.php$#i'   );  /* WordPress-Template-engine */
+                    $is_admin   = $is_server_val('SCRIPT_URL', '#\/wp\-admin\/#i' );  /* admin folder */
+                    $is_feed    = $is_server_val('SCRIPT_URL', '#\/feed\/#i'      ) || $is_server_val('REDIRECT_SCRIPT_URL',  '#\/feed\/#i'      );
+                    $is_atom    = $is_server_val('SCRIPT_URL', '#\/atom\/#i'      ) || $is_server_val('REDIRECT_SCRIPT_URL',  '#\/atom\/#i'      );
+                    $is_json    = $is_server_val('SCRIPT_URL', '#\/wp\-json\/#i'  ) || $is_server_val('REDIRECT_SCRIPT_URL',  '#\/wp\-json\/#i'  );
+                    $is_sitemap = $is_server_val('SCRIPT_URL', '#sitemap\.xml$#i' ) || $is_server_val('REDIRECT_SCRIPT_URL',  '#sitemap\.xml$#i' );
+                    $is_article = $is_server_val('SCRIPT_URL', '#\/$#i'           );  /* RISKY! permalink format specific. */
+
+                    unset($is_server_val);
+
                     return (  true  === $is_php
                            && false === $is_admin
                            && false === $is_feed
