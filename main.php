@@ -29,7 +29,31 @@
 
 
 call_user_func(function () {
-  if (is_admin()) return;
+  /* ---------------------------------------------------------------------------------------------- */
+  $is_engine_ok = call_user_func(function(){
+                    function is_server_val($attribute, $regex){
+                      return (1 === preg_match($regex, filter_input(INPUT_SERVER,$attribute)));
+                    }
+
+                    $is_php     = is_server_val('PHP_SELF',   '#index\.php$#i'   );  /* WordPress-Template-engine */
+                    $is_admin   = is_server_val('SCRIPT_URL', '#\/wp\-admin\/#i' );  /* admin folder */
+                    $is_feed    = is_server_val('SCRIPT_URL', '#\/feed\/#i'      ) || is_server_val('REDIRECT_SCRIPT_URL',  '#\/feed\/#i'      );
+                    $is_atom    = is_server_val('SCRIPT_URL', '#\/atom\/#i'      ) || is_server_val('REDIRECT_SCRIPT_URL',  '#\/atom\/#i'      );
+                    $is_json    = is_server_val('SCRIPT_URL', '#\/wp\-json\/#i'  ) || is_server_val('REDIRECT_SCRIPT_URL',  '#\/wp\-json\/#i'  );
+                    $is_sitemap = is_server_val('SCRIPT_URL', '#sitemap\.xml$#i' ) || is_server_val('REDIRECT_SCRIPT_URL',  '#sitemap\.xml$#i' );
+                    $is_article = is_server_val('SCRIPT_URL', '#\/$#i'           );  /* RISKY! permalink format specific. */
+                    
+                    return (  true  === $is_php
+                           && false === $is_admin
+                           && false === $is_feed
+                           && false === $is_atom
+                           && false === $is_json
+                           && false === $is_sitemap
+                           && true  === $is_article
+                           );
+                  });
+  if(false === $is_engine_ok) return;
+  /* ---------------------------------------------------------------------------------------------- */
 
   require_once('assist.php');
   require_once('modifiers.php');
